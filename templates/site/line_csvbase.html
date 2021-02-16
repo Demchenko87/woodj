@@ -54,6 +54,8 @@
             <div class="form-group col">
             <input id="EDRPOU" type="text" name="EDRPOU" placeholder="ЄДРПОУ" class="form-control" required>
             </div>
+
+
                 </div>
             <button type="submit" class="btn btn-dark"><i class="fas fa-print"></i> Друк Акт</button>
             <button type="submit" class="btn btn-dark" formaction="{% url 'print_dogovor' %}"><i class="fas fa-print"></i> Друк Договiр</button>
@@ -78,6 +80,8 @@
             <div class="form-group col">
             <input id="EDRPOU" type="hidden" name="EDRPOU" placeholder="ЄДРПОУ" class="form-control" value="{{ user.contact.edrpo }}" required>
             </div>
+
+
                 </div>
             <button type="submit" class="btn btn-dark"><i class="fas fa-print"></i> Друк Акт</button>
             <button type="submit" class="btn btn-dark" formaction="{% url 'print_dogovor' %}"><i class="fas fa-print"></i> Друк Договiр</button>

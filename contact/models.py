@@ -10,6 +10,7 @@ class Contact(models.Model):
     fio = models.CharField("ФИО", max_length=150)
     phone = models.CharField("Телефон", max_length=150)
     edrpo = models.CharField("ЄДРПОУ", max_length=150)
+
     message = models.TextField("Информация про участника")
 
     def __str__(self):
