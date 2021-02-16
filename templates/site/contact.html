@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% include 'site/include/head.html' %}
+<body>
+
+{% include 'site/include/header.html' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Контакти</h2>
+
+          <ol>
+            <li><a href="{% url 'index' %}">Головна</a></li>
+            <li>Контакти</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Contact Section ======= -->
+    <div class="map-section">
+
+     <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2564.26030320333!2d36.2260995158013!3d50.00647612713609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4127a11ffd8e0641%3A0x37c21ce3cb3ab0d6!2z0LzQsNC50LTQsNC9INCh0LLQvtCx0L7QtNC4LCA1LCDQpdCw0YDQutGW0LIsINCl0LDRgNC60ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1sru!2sua!4v1496131091537" frameborder="0" allowfullscreen></iframe>
+
+
+    </div>
+
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="row justify-content-center" data-aos="fade-up">
+
+          <div class="col-lg-10">
+
+            <div class="info-wrap">
+              <div class="row">
+                <div class="col-lg-4 info">
+                  <i class="icofont-google-map"></i>
+                  <h4>Адреса:</h4>
+                  <p>61022, Україна, м. Харків, <br>майдан Свободи, буд. 5, Держпром , <br>4 під’їзд, 2 поверх, каб. 33</p>
+                </div>
+
+                <div class="col-lg-4 info mt-4 mt-lg-0">
+                  <i class="icofont-envelope"></i>
+                  <h4>Email:</h4>
+                  <p>kharkovapbirzha@gmail.com</p>
+                </div>
+
+                <div class="col-lg-4 info mt-4 mt-lg-0">
+                  <i class="icofont-phone"></i>
+                  <h4>Телефон:</h4>
+                  <p>(054) 265-00-58 (Факс)<br>
+                      (050) 307-26-74 (Бухгалтерія)<br>
+                      (095) 551 52 07 <br>(Аукціони з продажу необробленої деревини)
+
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+{% include 'site/include/footer.html' %}
+</body>
+
+</html>

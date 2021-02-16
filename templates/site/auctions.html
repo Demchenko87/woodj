@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% include 'site/include/head.html' %}
+<body>
+
+{% include 'site/include/header.html' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Аукціони</h2>
+
+          <ol>
+            <li><a href="{% url 'index' %}">Головна</a></li>
+            <li>{% for auctions in auctions_list %}
+           {{ auctions.pagetitle|safe}}
+        {% endfor %}</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= About Us Section ======= -->
+    <section id="about-us" class="about-us">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row content">
+
+        {% for auctions in auctions_list %}
+            <p>{{ auctions.content|safe}}</p>
+        {% endfor %}
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+  </main><!-- End #main -->
+
+
+{% include 'site/include/footer.html' %}
+</body>
+
+</html>

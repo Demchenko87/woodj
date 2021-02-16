@@ -1,0 +1,24 @@
+{% load static %}
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+        <h1 class="logo me-auto"><a href="{% url 'index' %}"><img src="{% static 'assets/img/logo_new.jpg' %}" alt="logo"></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li><a href="{% url 'index' %}">Головна</a></li>
+          <li><a href="{% url 'services' %}">Послуги</a></li>
+          <li><a href="{% url 'auctions' %}">Аукціони</a></li>
+          <li><a href="{% url 'podacha' %}">Подача заявки</a></li>
+          <li><a href="{% url 'login' %}">Особистий кабінет</a></li>
+          <li><a href="{% url 'contacts' %}">Контакти</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+
+
+
+    </div>
+  </header>

@@ -1,0 +1,42 @@
+<form action="{% url 'contact' %}" method="post" class="shadow-lg p-3 mb-5 bg-white rounded">
+                  {% csrf_token %}
+                  <div class="row">
+                <div class="form-group mb-3">
+                  <input type="text" name="login" class="form-control" id="login" placeholder="Логін" data-rule="minlen:4" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" data-msg="Введіть принаймні 4 символи" required/>
+                  <small id="emailHelp" class="form-text text-muted">Обов'язкове поле. Не більше 150 символів. Тільки букви, цифри і символи @ /. / + / - / _.</small>
+                    <div class="validate"></div>
+                </div>
+                <div class="form-group mb-3">
+                  <input type="password" class="form-control" name="password" id="password" placeholder="Пароль" data-rule="minlen:8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" data-msg="Введіть дійсний пароль" required/>
+                    <small id="emailHelp" class="form-text text-muted">Пароль не повинен бути надто схожий на іншу вашу особисту інформацію. Ваш пароль повинен містити як мінімум 8 символів. Такий пароль часто використовується. Пароль не може складатися тільки з цифр.</small>
+                    <div class="validate"></div>
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <input type="email" class="form-control" name="email" id="email" placeholder="E-mail"  data-msg="Введіть дійсний електронний лист" required/>
+                <div class="validate"></div>
+              </div>
+
+                <div class="form-group mb-3">
+                  <input type="fio" name="fio" class="form-control" id="fio" placeholder="ПІБ" data-rule="minlen:4" data-msg="Введіть ПІБ" required />
+                  <div class="validate"></div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <input type="text" name="phone" class="form-control" id="phone" placeholder="Телефон" data-rule="minlen:6" data-msg="Введіть телефон" required/>
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group mb-3">
+                  <input type="text" name="edrpo" class="form-control" id="edrpo" placeholder="код ЄДРПОУ" data-rule="minlen:8" pattern="[0-9]{8,10}" data-msg="Введіть ЄДРПОУ" required />
+                  <div class="validate"></div>
+                </div>
+
+              <div class="form-group mt-3">
+              <small id="emailHelp" class="form-text text-muted">Інформація про учасника (найменування, адреса, банківські реквізити, керівник)</small>
+
+                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Введіть інформацію учасника" placeholder="Інформація про учасника" required></textarea>
+                <div class="validate"></div>
+              </div>
+
+<div class="text-center mt-3"><button type="submit" class="btn" style="color:#fff;background: #2ae149;">Подати заявку</button></div>
+</form>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% include 'site/include/head.html' %}
+<body>
+
+{% include 'site/include/header.html' %}
+
+<body>
+
+{% include 'site/include/header.html' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Детальнiше</h2>
+
+          <ol>
+            <li><a href="{% url 'index' %}">Головна</a></li>
+            <li>Особистий кабінет</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Contact Section ======= -->
+
+
+    <section id="contact" class="contact" style="padding:0 0 25px 0;" >
+      <div class="container">
+        <div class="row mt-5" data-aos="fade-up">
+          <div class="col-4">
+
+
+              <p><b>Дата:</b> {{ csvbase.date }}</p>
+              <p><b>№ лоту:</b> {{ csvbase.numb_lot }}</p>
+            <p><b>П/лот:</b> {{ csvbase.p_lot}}</p>
+              <p><b>Продавець:</b> {{ csvbase.seller}}</p>
+            <p><b>Продукція:</b> {{ csvbase.product_name}}</p>
+            <p><b>Порода:</b> {{ csvbase.product_type}}</p>
+           <p><b>Гатунок:</b> {{ csvbase.product_kind}}</p>
+           <p><b>Діаметр (см):</b> {{ csvbase.product_diameter}}</p>
+            <p><b>Довжина (м):</b> {{ csvbase.product_length}}</p>
+            <p><b>Склад:</b> {{ csvbase.storehouse}}</p>
+            <p><b>Об'єм (м3):</b> {{ csvbase.product_size}}</p>
+            <p><b>Початкова ціна (куб.м.):</b> {{ csvbase.start_product_price}}</p>
+           <p><b>Початкова ціна (лот):</b> {{ csvbase.start_lot_price}}</p>
+           <p><b>Продажна ціна (куб.м.):</b> {{ csvbase.end_product_price}}</p>
+            <p><b>Продажна ціна (лот):</b> {{ csvbase.end_lot_price}}</p>
+            <p><b>Найменування покупця:</b> {{ csvbase.buyer}}</p>
+            <p><b>код ЄДРПОУ:</b> {{ csvbase.EDRPOU}}</p>
+            <p><b>№ свідоцтва плати ПДВ:</b> {{ csvbase.PDV_certificate}}</p>
+            <p><b>Інд. Податковий номер (ІПН):</b> {{ csvbase.IPN}}</p>
+            <p><b>Юр.адреса:</b> {{ csvbase.buyer_address}}</p>
+            <p><b>Телефони:</b> {{ csvbase.contact}}</p>
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+      <br>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+{% include 'site/include/footer.html' %}
+</body>
+
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>

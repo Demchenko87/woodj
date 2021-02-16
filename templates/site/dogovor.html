@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% include 'site/include/head.html' %}
+<body>
+
+{% include 'site/include/header.html' %}
+
+<body>
+
+{% include 'site/include/header.html' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Import CSV</h2>
+
+          <ol>
+            <li><a href="{% url 'index' %}">Головна</a></li>
+            <li>Особистий кабінет</li>
+          </ol>
+        </div>
+
+      </div>
+</section><!-- End Breadcrumbs -->
+    <!-- ======= Contact Section ======= -->
+
+
+    <section id="contact" class="contact" style="padding:0 0 25px 0;" >
+      <div class="container">
+        <div class="row mt-5 justify-content-center" data-aos="fade-up">
+          <div class="col-lg-4">
+
+
+
+    <h1>
+{{ date_list }} - {{ EDRPOU_list }}
+    </h1>
+
+
+    {% for csvbase in csvbase_list %}
+        {% if csvbase.EDRPOU == '' %}
+        {% else %}
+            <p>{{ csvbase.EDRPOU }} - {{ csvbase.numb_lot }} - {{ csvbase.date }} - {{ csvbase.end_lot_price }} грн.</p>
+        {% endif %}
+    {% endfor %}
+      <hr>
+          <h4>Сумма: {{ resultsum_list }} грн</h4>
+<p>{{ resultsum_in_words_list }}</p>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+      <br>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+{% include 'site/include/footer.html' %}
+
+</body>
+</html>
