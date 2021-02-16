@@ -38,7 +38,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 text-right">
-            <button onclick="window.print();" class="noPrint btn btn-dark m-2 p-2"><i class="fas fa-print"></i> Друк</button>
+            <button onclick="window.print();" class="noPrint btn btn-danger m-2 p-2"><i class="fas fa-print"></i> Друк</button>
         </div>
         <div class="col-12 text-left">
         <img src="{% static 'print/agrarna.png' %}" alt="logo" width="390"><br><br>
@@ -128,7 +128,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
     </div>
 
         <div class="col-12 mt-5">
-           <p>Загальний обсяг прибданої на аукціоні деревини : <b>200,00 куб.м.</b></p>
+           <p>Загальний обсяг прибданої на аукціоні деревини : <b>{{ product_sizesum_list }} куб.м.</b></p>
   <p>Загальна вартість придбаних лотів становить :  <b>{{ resultsum_list }} грн.</b></p>
 <p class="text-center"><b>({{ resultsum_in_words_list }})</b></p>
             <p>Данне Свідоцтво є підставою для укладання договору купівлі - продажу необробленої деревини з поставкою у I КВАРТАЛІ 2021 року.
@@ -156,7 +156,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
             <td>19267,50</td>
          </tr>
          <tr>
-            <td>ПОВЕРНЕННЯ (+)  /  ДОПЛАТА (-</td>
+            <td>ПОВЕРНЕННЯ (+)  /  ДОПЛАТА (-)</td>
             <td>-4624,20</td>
          </tr>
   </table>

@@ -82,6 +82,8 @@ def print_act(request):
     date = request.POST['date']
     EDRPOU = request.POST['EDRPOU']
     csvbase = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date))
+    product_sizesum = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).aggregate(Sum('product_size'))[
+        'product_size__sum']
 
     resultsum = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).aggregate(Sum('end_lot_price'))['end_lot_price__sum']
 
@@ -109,7 +111,8 @@ def print_act(request):
                                               'date_list': date,
                                               'csvbase_list': csvbase,
                                               'resultsum_list': total_numbers,
-                                              'resultsum_in_words_list':total_leters})
+                                              'resultsum_in_words_list': total_leters,
+                                              'product_sizesum_list': product_sizesum})
 
 
 def print_dogovor(request):
