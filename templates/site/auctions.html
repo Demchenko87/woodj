@@ -15,12 +15,9 @@
 
         <div class="d-flex justify-content-between align-items-center">
           <h2>Аукціони</h2>
-
-          <ol>
+            <ol>
             <li><a href="{% url 'index' %}">Головна</a></li>
-            <li>{% for auctions in auctions_list %}
-           {{ auctions.pagetitle|safe}}
-        {% endfor %}</li>
+            <li>Аукціони</li>
           </ol>
         </div>
 
@@ -33,7 +30,10 @@
         <div class="row content">
 
         {% for auctions in auctions_list %}
+            <div class="col-12">
             <p>{{ auctions.content|safe}}</p>
+            <hr>
+            </div>
         {% endfor %}
         </div>
 

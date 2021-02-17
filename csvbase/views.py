@@ -83,7 +83,6 @@ def print_act(request):
     EDRPOU = request.POST['EDRPOU']
     buyer2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('buyer')[0]
     buyer = buyer2[0]
-    # buyer = request.POST['buyer']
     csvbase = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date))
     product_sizesum = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).aggregate(Sum('product_size'))[
         'product_size__sum']

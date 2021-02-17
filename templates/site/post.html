@@ -50,7 +50,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
 
     <p>тел (095) 551-52-07</p>
 
-    <a href="www.tbapb.kh.ua">tbapb.kh.ua</a>
+    <a href="http://tbapb.kh.ua">tbapb.kh.ua</a>
 
                 </p>
             </div>
@@ -135,7 +135,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
 
         <div class="col-12 mt-5">
            <p>Загальний обсяг прибданої на аукціоні деревини : <b>{{ product_sizesum_list }} куб.м.</b></p>
-  <p>Загальна вартість придбаних лотів становить :  <b>{{ resultsum_list }} грн.</b></p>
+            <p>Загальна вартість придбаних лотів становить : <b> <span id="sumlist">{{ resultsum_list }}</span> грн.</b></p>
 <p class="text-center"><b>({{ resultsum_in_words_list }})</b></p>
             <p>Данне Свідоцтво є підставою для укладання договору купівлі - продажу необробленої деревини з поставкою у I КВАРТАЛІ 2021 року.
             На підставі данного аукціонного свідоцтва протягом 10 - календарних днів від закінчення аукціонної сесії Переможець і Продавець повинні укласти
@@ -151,11 +151,11 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
      <table style="font-weight: bold">
          <tr>
             <td>ГАРАНТІЙНИЙ ВНЕСОК 5%</td>
-            <td>19267,50</td>
+            <td id="garantvnesok"></td>
          </tr>
          <tr>
             <td>КОМІСІЙНИЙ ЗБІР 1,2%</td>
-            <td>4624,20</td>
+            <td id="komisiya"></td>
          </tr>
          <tr>
             <td>ГАРАНТІЙНИЙ ВНЕСОК 5% ДП "Лебединське ЛГ"</td>
@@ -179,5 +179,16 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
     </div>
     </div>
 </div>
+
+
+
+<script type="text/javascript">
+var resultsum = document.getElementById("sumlist").innerText;
+var fiveproc = (resultsum * 5 / 100).toFixed(2);
+document.getElementById("garantvnesok").innerText = fiveproc;
+var oneandtow = (resultsum * 1.2 / 100).toFixed(2);
+document.getElementById("komisiya").innerText = oneandtow;
+</script>
+
 </body>
 </html>
