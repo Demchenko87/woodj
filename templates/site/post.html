@@ -67,10 +67,10 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
 
 
         <div class="col-12 text-center mt-5 mb-3">
-        <h4>АУКЦІОННЕ СВІДОЦТВОПРО </h4>
+        <h4>АУКЦІОННЕ СВІДОЦТВОПРО </h4><br>
         <p>РЕЗУЛЬТАТИ ЕЛЕКТРОННОГО АУКЦІОНУ ІЗ ПРОДАЖУ НЕОБРОБЛЕНОЇ ДЕРЕВИНИ НА І квартал 2021 року</p>
     </div>
-        <div class="col-6 text-left"><p><b>09 Лютого 2021 року</b></p></div>
+        <div class="col-6 text-left"><p><b>{{ date_text_list }}</b></p></div>
         <div class="col-6 text-right"><p><b>м. Харків</b></p></div>
 
 
@@ -83,7 +83,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
 
 
         </b></ins></p>
-<p>на електронних аукціонних торгах з продажу необробленої деревини , які відбулися <b>09 лютого 2021</b> року на <b>Товарній біржі "Агропромбіржа"</b> став переможцем по наступним лотам :</p>
+<p>на електронних аукціонних торгах з продажу необробленої деревини , які відбулися <b>{{ date_text_list }}</b> на <b>Товарній біржі "Агропромбіржа"</b> став переможцем по наступним лотам :</p>
     </div>
         <div class="col-12">
         <table>
@@ -131,24 +131,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
    </tr>
 
   </table>
-<h1>{{ seller_list }}</h1>
-            <hr>
-    {% for seller in seller_list %}
-        {{ seller }}
-    {% endfor %}
 
-{#       <hr>#}
-{#        {% for csvbase in csvbase_list %}#}
-{#           {% if csvbase.seller == 'ДП "Лебединський лісгосп"' %}#}
-{#               <h6 id="{{ csvbase.id }}">#}
-{##}
-{#                   {{ csvbase.end_lot_price }}#}
-{#               </h6>#}
-{#           {% endif %}#}
-{#        {% endfor %}#}
-{#<hr>#}
-{#<h1 id="summa1"></h1>#}
-{#<hr>#}
 
 
 
@@ -178,16 +161,25 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
             <td>КОМІСІЙНИЙ ЗБІР 1,2%</td>
             <td id="komisiya"></td>
          </tr>
+          {% for seller in summa_list  %}
+
          <tr>
-            <td>ГАРАНТІЙНИЙ ВНЕСОК 5% ДП "Лебединське ЛГ"</td>
-            <td>19267,50</td>
+                <td>ГАРАНТІЙНИЙ ВНЕСОК 5% {{ seller.seller }}</td>
+                <td id="sumseller_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}" style="display: none;">{{ seller.sum }}</td>
+                <td id="sumseller_vivod_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}"></td>
          </tr>
+              <script>
+                var resultsum = document.getElementById("sumseller_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}").innerText.replace(/,/, '.');
+                var fiveproc = (resultsum * 5 / 100).toFixed(2);
+                document.getElementById("sumseller_vivod_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}").innerText = fiveproc;
+              </script>
+         {% endfor %}
          <tr>
             <td>ПОВЕРНЕННЯ (+)  /  ДОПЛАТА (-)</td>
             <td>-4624,20</td>
          </tr>
   </table>
-
+<h1><div id="sum_fi_one"></div></h1>
 
 
 
@@ -204,11 +196,16 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
 
 
 <script type="text/javascript">
-var resultsum = document.getElementById("sumlist").innerText;
+var resultsum = document.getElementById("sumlist").innerText.replace(/,/, '.');
 var fiveproc = (resultsum * 5 / 100).toFixed(2);
 document.getElementById("garantvnesok").innerText = fiveproc;
 var oneandtow = (resultsum * 1.2 / 100).toFixed(2);
 document.getElementById("komisiya").innerText = oneandtow;
+
+
+var sum_fi_one = (Number(fiveproc) - Number(oneandtow)).toFixed(2);
+document.getElementById("sum_fi_one").innerText = sum_fi_one;
+
 </script>
 
 </body>

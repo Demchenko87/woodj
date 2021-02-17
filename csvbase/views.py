@@ -33,10 +33,6 @@ def upload_data(path):
 
             if row[0].isdigit() == False or row[0] == '':
                 pass
-            # if line_count == 0:
-            #     line_count += 1
-            # elif row[0] == '':
-            #     pass
             else:
                 numb_lot = row[0]
                 p_lot = row[1]
@@ -84,13 +80,17 @@ def print_act(request):
     buyer2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('buyer')[0]
     buyer = buyer2[0]
 
-    seller2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('seller').order_by('seller')
-    seller = get_uniq_seller(seller2)
+    #seller2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('seller').order_by('seller')
+    # seller = get_uniq_seller(seller2)
 
 
     csvbase = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date))
+
     product_sizesum = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).aggregate(Sum('product_size'))[
         'product_size__sum']
+
+    summa = Csvbase.objects.filter(EDRPOU=EDRPOU, date=date ).values('seller').annotate(sum=Sum('end_lot_price'))
+
     resultsum = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).aggregate(Sum('end_lot_price'))['end_lot_price__sum']
 
     total_sum = round(resultsum, 2)
@@ -113,38 +113,18 @@ def print_act(request):
     total_numbers = str(uah) + '.' + str(kop)
     total_leters = str(grn_leters) + ' ' + str(grn_text) + ' ' + str(kop_leters) + ' ' + str(kop_text)
 
+    date_text = get_text_date(date)
+
     return render(request, "site/post.html", {'EDRPOU_list': EDRPOU,
                                               'date_list': date,
                                               'buyer_list': buyer,
-                                              'seller_list': seller,
+                                              # 'seller_list': seller,
                                               'csvbase_list': csvbase,
                                               'resultsum_list': total_numbers,
                                               'resultsum_in_words_list': total_leters,
-                                              'product_sizesum_list': product_sizesum})
-
-
-def get_uniq_seller(request):
-    seller = []
-    uniq_seller = set(request)
-    for request in uniq_seller:
-        seller.append(request)
-    return seller
-#
-# def get_uniq_seller(seller, EDRPOU):
-#     print(seller)
-#     print(EDRPOU)
-#     seller = []
-#     uniq_seller = set(seller)
-#     for seller in uniq_seller:
-#         seller.append(seller)
-#
-#     for name in seller:
-#         end_lot_price = Csvbase.objects.all().filter(Q(seller=name), Q(EDRPOU=EDRPOU)).aggregate(Sum('end_lot_price'))['end_lot_price__sum']
-#
-#         print(end_lot_price)
-#     # print(seller)
-#     return seller
-
+                                              'product_sizesum_list': product_sizesum,
+                                              'summa_list': summa,
+                                              'date_text_list': date_text})
 
 
 def print_dogovor(request):
@@ -179,6 +159,47 @@ def print_dogovor(request):
                                               'csvbase_list': csvbase,
                                               'resultsum_list': total_numbers,
                                               'resultsum_in_words_list':total_leters})
+
+
+
+
+
+# def get_uniq_seller(request):
+#     seller = []
+#     uniq_seller = set(request)
+#     for request in uniq_seller:
+#         seller.append(request)
+#     return seller
+
+def get_text_date(input):
+    year, month, date = input.split('-')
+    if month == '01':
+        month = 'січеня'
+    elif month == '02':
+        month = 'лютого'
+    elif month == '03':
+        month = 'березеня'
+    elif month == '04':
+        month = 'квітеня'
+    elif month == '05':
+        month = 'травеня'
+    elif month == '06':
+        month = 'червеня'
+    elif month == '07':
+        month = 'липеня'
+    elif month == '08':
+        month = 'серпеня'
+    elif month == '09':
+        month = 'вересеня'
+    elif month == '10':
+        month = 'жовтеня'
+    elif month == '11':
+        month = 'листопада'
+    elif month == '12':
+        month = 'груденя'
+    print_date=date + ' ' + month + ' ' + year + ' року'
+    return print_date
+
 
 # def filter_result(request):
 #    message = request.POST
