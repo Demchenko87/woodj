@@ -131,6 +131,27 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
    </tr>
 
   </table>
+<h1>{{ seller_list }}</h1>
+            <hr>
+    {% for seller in seller_list %}
+        {{ seller }}
+    {% endfor %}
+
+{#       <hr>#}
+{#        {% for csvbase in csvbase_list %}#}
+{#           {% if csvbase.seller == 'ДП "Лебединський лісгосп"' %}#}
+{#               <h6 id="{{ csvbase.id }}">#}
+{##}
+{#                   {{ csvbase.end_lot_price }}#}
+{#               </h6>#}
+{#           {% endif %}#}
+{#        {% endfor %}#}
+{#<hr>#}
+{#<h1 id="summa1"></h1>#}
+{#<hr>#}
+
+
+
     </div>
 
         <div class="col-12 mt-5">

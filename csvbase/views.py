@@ -83,10 +83,14 @@ def print_act(request):
     EDRPOU = request.POST['EDRPOU']
     buyer2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('buyer')[0]
     buyer = buyer2[0]
+
+    seller2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('seller').order_by('seller')
+    seller = get_uniq_seller(seller2)
+
+
     csvbase = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date))
     product_sizesum = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).aggregate(Sum('product_size'))[
         'product_size__sum']
-
     resultsum = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).aggregate(Sum('end_lot_price'))['end_lot_price__sum']
 
     total_sum = round(resultsum, 2)
@@ -111,11 +115,36 @@ def print_act(request):
 
     return render(request, "site/post.html", {'EDRPOU_list': EDRPOU,
                                               'date_list': date,
-                                              'buyer_list':buyer,
+                                              'buyer_list': buyer,
+                                              'seller_list': seller,
                                               'csvbase_list': csvbase,
                                               'resultsum_list': total_numbers,
                                               'resultsum_in_words_list': total_leters,
                                               'product_sizesum_list': product_sizesum})
+
+
+def get_uniq_seller(request):
+    seller = []
+    uniq_seller = set(request)
+    for request in uniq_seller:
+        seller.append(request)
+    return seller
+#
+# def get_uniq_seller(seller, EDRPOU):
+#     print(seller)
+#     print(EDRPOU)
+#     seller = []
+#     uniq_seller = set(seller)
+#     for seller in uniq_seller:
+#         seller.append(seller)
+#
+#     for name in seller:
+#         end_lot_price = Csvbase.objects.all().filter(Q(seller=name), Q(EDRPOU=EDRPOU)).aggregate(Sum('end_lot_price'))['end_lot_price__sum']
+#
+#         print(end_lot_price)
+#     # print(seller)
+#     return seller
+
 
 
 def print_dogovor(request):
