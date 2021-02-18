@@ -1,69 +1,253 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 {% load static %}
-{% include 'site/include/head.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>АУКЦІОННЕ СВІДОЦТВОПРО </title>
+    <style type="text/css" media="print">
+@page {
+    size: auto;   /* auto is the initial value */
+    margin: 2cm;  /* this affects the margin in the printer settings */
+}
+
+@media print {
+  .noPrint{
+    display:none;
+  }
+
+}
+
+</style>
+    <style>
+table tr th {
+  border: 1px solid black;
+    text-align: center;
+    padding: 2px;
+    font-size:12px;
+}
+td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
+    </style>
+</head>
 <body>
 
-{% include 'site/include/header.html' %}
 
-<body>
+<div class="container mt-0">
+    <div class="row p-0">
+        <div class="col-12 text-right">
+            <button onclick="window.print();" class="noPrint btn btn-danger m-2 p-2"><i class="fas fa-print"></i> Друк</button>
+        </div>
+        <div class="col-12 text-left">
+        <img src="{% static 'print/agrarna.png' %}" alt="logo" width="390"><br><br>
+    </div>
+            <div class="col-6 text-left">
 
-{% include 'site/include/header.html' %}
+                <p><b>ТОВАРНА БІРЖА "Агропромбіржа"</b></p>
+    <p>61022, м. Харків, майдан Свободи, 5, Держпром</p>
 
-  <main id="main">
+    <p>тел (095) 551-52-07</p>
 
-    <!-- ======= Breadcrumbs ======= -->
-<section id="breadcrumbs" class="breadcrumbs">
+    <a href="http://tbapb.kh.ua">tbapb.kh.ua</a>
 
-      <div class="container">
+                </p>
+            </div>
+            <div class="col-6 text-right">
+<p>ЗАТВЕРДЖУЮ</p>
 
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Import CSV</h2>
+<p>Директор ТБ "Агропромбіржа"</p>
 
-          <ol>
-            <li><a href="{% url 'index' %}">Головна</a></li>
-            <li>Особистий кабінет</li>
-          </ol>
+<p>_____________ Р.П. Вихор</p>
+
+<p>М.П.</p>
+
+            </div>
+
+
+        <div class="col-12 text-center mt-5 mb-3">
+        <h4>АУКЦІОННЕ СВІДОЦТВОПРО </h4><br>
+        <p>РЕЗУЛЬТАТИ ЕЛЕКТРОННОГО АУКЦІОНУ ІЗ ПРОДАЖУ НЕОБРОБЛЕНОЇ ДЕРЕВИНИ НА {{ quarter_list }} КВАРТАЛ 2021 року</p>
+    </div>
+        <div class="col-6 text-left"><p><b>{{ date_text_list }}</b></p></div>
+        <div class="col-6 text-right"><p><b>м. Харків</b></p></div>
+
+
+
+        <div class="col-12 text-left">
+        <p>Цим Свідоцтво засвідчується, що учасник <ins><b>
+
+         {{ buyer_list }}
+
+
+
+        </b></ins></p>
+<p>на електронних аукціонних торгах з продажу необробленої деревини , які відбулися <b>{{ date_text_list }}</b> на <b>Товарній біржі "Агропромбіржа"</b> став переможцем по наступним лотам :</p>
+    </div>
+        <div class="col-12">
+        <table>
+
+            <tr>
+                <th>№ лоту</th>
+                <th>№ п/лоту</th>
+                <th>Продукция</th>
+                <th>Порода</th>
+                <th>Гатунок</th>
+                <th>Дiаметр</th>
+                <th>Довжина</th>
+                <th>Склад</th>
+                <th>Об'єм (м3)</th>
+                <th>За м3 (почат)</th>
+                <th>Ціна лот (почат)</th>
+                <th>Продажна ціна м3</th>
+                <th>Всього</th>
+                <th>Продавець</th>
+   </tr>
+   <tr>
+       {% for csvbase in csvbase_list %}
+           {% if csvbase.EDRPOU == '' %}
+
+           {% else %}
+               <tr>
+                 <td>{{ csvbase.numb_lot }}</td>
+                 <td>{{ csvbase.p_lot }}</td>
+                 <td>{{ csvbase.product_name }}</td>
+                 <td>{{ csvbase.product_type }}</td>
+                 <td>{{ csvbase.product_kind }}</td>
+                 <td>{{ csvbase.product_diameter }}</td>
+                 <td>{{ csvbase.product_length }}</td>
+                 <td>{{ csvbase.storehouse }}</td>
+                 <td>{{ csvbase.product_size }}</td>
+                 <td>{{ csvbase.start_product_price }}</td>
+                 <td>{{ csvbase.start_lot_price }}</td>
+                 <td>{{ csvbase.end_product_price }}</td>
+                 <td>{{ csvbase.end_lot_price }}</td>
+                 <td>{{ csvbase.seller }}</td>
+               </tr>
+            {% endif %}
+       {% endfor %}
+            <br>
+   </tr>
+
+  </table>
+
+    </div>
+
+        <div class="col-12 mt-5">
+           <p>Загальний обсяг прибданої на аукціоні деревини : <b>{{ product_sizesum_list }} куб.м.</b></p>
+            <p>Загальна вартість придбаних лотів становить : <b> <span id="sumlist">{{ resultsum_list }}</span> грн.</b></p>
+<p class="text-center"><b>({{ resultsum_in_words_list }})</b></p>
+            <p>Данне Свідоцтво є підставою для укладання договору купівлі - продажу необробленої деревини з поставкою у {{ quarter_list }} кварталi 2021 року.
+            На підставі данного аукціонного свідоцтва протягом 10 - календарних днів від закінчення аукціонної сесії Переможець і Продавець повинні укласти
+           договір купівлі - продажу. Гарантійний внесок на лісгосп перераховується після укладання договору. В разі неукладання в указаний термін результати
+            аукціону анульовуються, а Переможець штрафується на суму гарантійного внеску.</p>
         </div>
 
-      </div>
-</section><!-- End Breadcrumbs -->
-    <!-- ======= Contact Section ======= -->
+
+      <div class="col-12 mt-5">
+      <p class="text-center"><b>РОЗРАХУНОК РОЗПОДІЛУ ГАРАНТІЙНОГО ВНЕСКУ</b></p>
+  </div>
+<div class="col-12">
+{% if garantv_list == '' %}
+         <table style="font-weight: bold">
+         <tr>
+            <td>ГАРАНТІЙНИЙ ВНЕСОК 5%</td>
+            <td id="garantvnesok"></td>
+         </tr>
+         <tr>
+            <td>КОМІСІЙНИЙ ЗБІР {{ commission_list }}%</td>
+            <td id="komisiya"></td>
+         </tr>
+          {% for seller in summa_list  %}
+
+         <tr>
+                <td>ГАРАНТІЙНИЙ ВНЕСОК 5% {{ seller.seller }}</td>
+                <td id="sumseller_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}" style="display: none;">{{ seller.sum }}</td>
+                <td id="sumseller_vivod_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}"></td>
+         </tr>
+              <script>
+                var resultsum = document.getElementById("sumseller_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}").innerText.replace(/,/, '.');
+                var fiveproc = (resultsum * 5 / 100).toFixed(2);
+                document.getElementById("sumseller_vivod_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}").innerText = fiveproc;
+              </script>
+         {% endfor %}
+         <tr>
+            <td>ПОВЕРНЕННЯ (+)  /  ДОПЛАТА (-)</td>
+            <td id="sum_fi_one"></td>
+         </tr>
+  </table>
+{% else %}
+    <table style="font-weight: bold">
+         <tr>
+            <td>ГАРАНТІЙНИЙ ВНЕСОК 5%</td>
+              <td id="garantvnesok" hidden></td>
+            <td id="garantv_list">{{ garantv_list }}</td>
+         </tr>
+         <tr>
+            <td>КОМІСІЙНИЙ ЗБІР {{ commission_list }}%</td>
+            <td id="komisiya"></td>
+         </tr>
+          {% for seller in summa_list  %}
+
+         <tr>
+                <td>ГАРАНТІЙНИЙ ВНЕСОК 5% {{ seller.seller }}</td>
+                <td id="sumseller_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}" style="display: none;">{{ seller.sum }}</td>
+                <td id="sumseller_vivod_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}"></td>
+         </tr>
+              <script>
+                var resultsum = document.getElementById("sumseller_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}").innerText.replace(/,/, '.');
+                var fiveproc = (resultsum * 5 / 100).toFixed(2);
+                document.getElementById("sumseller_vivod_{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15' '16' '17' '18' '19' '20'%}").innerText = fiveproc;
+              </script>
+         {% endfor %}
+         <tr>
+            <td>ПОВЕРНЕННЯ (+)  /  ДОПЛАТА (-)</td>
+            <td id="sum_fi_one" hidden></td>
+              <td id="sum_fi_one_pravka"></td>
+         </tr>
+  </table>
+
+{% endif %}
 
 
-    <section id="contact" class="contact" style="padding:0 0 25px 0;" >
-      <div class="container">
-        <div class="row mt-5 justify-content-center" data-aos="fade-up">
-          <div class="col-lg-4">
 
 
 
-    <h1>
-{{ date_list }} - {{ EDRPOU_list }}
-    </h1>
 
 
-    {% for csvbase in csvbase_list %}
-        {% if csvbase.EDRPOU == '' %}
-        {% else %}
-            <p>{{ csvbase.EDRPOU }} - {{ csvbase.numb_lot }} - {{ csvbase.date }} - {{ csvbase.end_lot_price }} грн.</p>
-        {% endif %}
-    {% endfor %}
-      <hr>
-          <h4>Сумма: {{ resultsum_list }} грн</h4>
-<p>{{ resultsum_in_words_list }}</p>
+</div>
+<div class="col-9 mt-5">
 
-          </div>
+        <p>Представник біржі :   _________________________ /Р.П. Вихор /</p>
+        <p>Уповноважена особа Переможця :  _________________________ / <span style="margin-right: 230px;"></span>/</p>
+    <p class="text-right" style="margin-right: 20px;">М.П.</p>
+    </div>
+    </div>
+</div>
 
-        </div>
 
-      </div>
-    </section><!-- End Contact Section -->
-      <br>
-  </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-{% include 'site/include/footer.html' %}
+<script type="text/javascript">
+var resultsum = document.getElementById("sumlist").innerText.replace(/,/, '.');
+var fiveproc = (resultsum * 5 / 100).toFixed(2);
+document.getElementById("garantvnesok").innerText = fiveproc;
+var oneandtow = (resultsum * {{ commission_list }} / 100).toFixed(2);
+document.getElementById("komisiya").innerText = oneandtow;
 
+
+var sum_fi_one = (Number(fiveproc)-Number(fiveproc)- Number(oneandtow)).toFixed(2);
+document.getElementById("sum_fi_one").innerText = sum_fi_one;
+
+</script>
+<script>
+var garantv_list = document.getElementById("garantv_list").innerText.replace(/,/, '.');
+var garantvnesok = document.getElementById("garantvnesok").innerText.replace(/,/, '.');
+var komisiya = document.getElementById("komisiya").innerText.replace(/,/, '.');
+var sum_pravka = (Number(garantv_list)-Number(garantvnesok)-Number(komisiya)).toFixed(2);
+document.getElementById("sum_fi_one_pravka").innerText = sum_pravka;
+</script>
 </body>
 </html>

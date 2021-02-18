@@ -22,9 +22,34 @@ class Csvbase(models.Model):
     IPN = models.CharField("Інд. Податковий номер (ІПН)", max_length=150, blank=True, null=True)
     buyer_address = models.CharField("Юр.адреса", max_length=150, blank=True, null=True)
     contact = models.CharField("Телефони", max_length=150, blank=True, null=True)
+    commission = models.CharField("комісійний збір", max_length=150, blank=True, null=True)
 
     def __str__(self):
         return self.numb_lot
     class Meta:
         verbose_name = "CSV"
         verbose_name_plural = "Выгрузка CSV"
+
+
+class Agrhouse(models.Model):
+    name = models.CharField("Назва підприємства", max_length=150, blank=True, null=True)
+    director = models.CharField("в особі керівника", max_length=150, blank=True, null=True)
+    fio = models.CharField("Керівник ПІП", max_length=150, blank=True, null=True)
+    statut = models.CharField("на підставі", max_length=150, blank=True, null=True)
+    cod = models.CharField("КОД", max_length=150, blank=True, null=True)
+    number_pdv = models.CharField("№свідоцтва плати ПДВ", max_length=150, blank=True, null=True)
+    individual_number = models.CharField("Інд.подат. номер", max_length=150, blank=True, null=True)
+    adress = models.CharField("Юридична адреса", max_length=150, blank=True, null=True)
+    mailing_address = models.CharField("Поштова адреса", max_length=150, blank=True, null=True)
+    score = models.CharField("Рахунок", max_length=150, blank=True, null=True)
+    phone = models.CharField("ТЕЛЕФОНИ", max_length=150, blank=True, null=True)
+    email = models.CharField("E-Mail", max_length=150, blank=True, null=True)
+    region = models.CharField("Назва підприємства", max_length=150, blank=True, null=True)
+
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Сельхозы"
+        verbose_name_plural = "Список сельхозов"
+

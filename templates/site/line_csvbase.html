@@ -41,7 +41,7 @@
        </div>
            <hr>
                  <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-8">
 
 
 
@@ -53,6 +53,10 @@
             </div>
             <div class="form-group col">
             <input id="EDRPOU" type="text" name="EDRPOU" placeholder="ЄДРПОУ" class="form-control" required>
+            </div>
+
+            <div class="form-group col">
+            <input id="garantv" type="text" pattern="\d+(\.\d{2})?" name="garantv" placeholder="ГАРАНТІЙНИЙ ВНЕСОК 5%" class="form-control">
             </div>
 
 
@@ -73,6 +77,7 @@
 
         <form action="{% url 'print_act' %}" method = "POST" target="_blank">
             {% csrf_token %}
+             <input hidden id="garantv" type="text" pattern="\d+(\.\d{2})?" name="garantv">
             <div class="row">
             <div class="form-group col">
             <input id="date" type="date" name="date" placeholder="Дата" class="form-control" required>
@@ -80,6 +85,9 @@
             <div class="form-group col">
             <input id="EDRPOU" type="hidden" name="EDRPOU" placeholder="ЄДРПОУ" class="form-control" value="{{ user.contact.edrpo }}" required>
             </div>
+
+
+
 
 
                 </div>
