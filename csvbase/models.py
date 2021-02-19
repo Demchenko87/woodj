@@ -46,7 +46,6 @@ class Agrhouse(models.Model):
     email = models.CharField("E-Mail", max_length=150, blank=True, null=True)
     region = models.CharField("Назва підприємства", max_length=150, blank=True, null=True)
 
-
     def __str__(self):
         return self.name
     class Meta:

@@ -41,29 +41,48 @@
        </div>
            <hr>
                  <div class="row">
-              <div class="col-lg-8">
+              <div class="col-lg-12">
 
 
 
         <form action="{% url 'print_act' %}" method = "POST" target="_blank">
             {% csrf_token %}
             <div class="row">
-            <div class="form-group col">
+            <div class="form-group col-lg-3">
             <input id="date" type="date" name="date" placeholder="Дата" class="form-control" required>
             </div>
-            <div class="form-group col">
+            <div class="form-group col-lg-3">
             <input id="EDRPOU" type="text" name="EDRPOU" placeholder="ЄДРПОУ" class="form-control" required>
             </div>
 
-            <div class="form-group col">
+            <div class="form-group col-lg-3">
             <input id="garantv" type="text" pattern="\d+(\.\d{2})?" name="garantv" placeholder="ГАРАНТІЙНИЙ ВНЕСОК 5%" class="form-control">
             </div>
+                <div class="form-group col-lg-3">
+                <div class="input-group">
+  <select class="custom-select" name="lisgosp">
+    <option selected>Выбрати лісове господарство</option>
+    {% for agrhouse in agrhouse_list %}
+        <option value='{{ agrhouse.name }}'>{{ agrhouse.name }}</option>
+    {% endfor %}
 
+  </select>
+
+
+</div>
+                </div>
+
+
+<div class="form-group col-lg-12">
+            <button type="submit" class="btn btn-dark"><i class="fas fa-print"></i> Друк Акт</button>
+            <small id="emailHelp" class="form-text text-danger">* We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group col-lg-12 ">
+            <button type="submit" class="btn btn-dark" formaction="{% url 'print_dogovor' %}"><i class="fas fa-print"></i> Друк Договiр</button>
+            <small id="emailHelp" class="form-text text-danger">* We'll never share your email with anyone else.</small>
+            </div>
 
                 </div>
-            <button type="submit" class="btn btn-dark"><i class="fas fa-print"></i> Друк Акт</button>
-            <button type="submit" class="btn btn-dark" formaction="{% url 'print_dogovor' %}"><i class="fas fa-print"></i> Друк Договiр</button>
-
 
         </form>
               </div>
