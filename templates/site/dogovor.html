@@ -147,7 +147,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
             <p>3.3. Загальна сума договору: <b> <span id="sumlist">{{ resultsum_list }}</span> грн.</b></p>
 <p class="text-center">({{ resultsum_in_words_list }})</p>
 
-
+<p>з ПДВ, в т.ч. ПДВ <b><span id="pdv"></span></b> грн</p>
         </div>
 <div class="col-lg-12 text-center">
     <p><b>4. УМОВИ ПОСТАВКИ</b></p>
@@ -262,6 +262,11 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
 </div>
 
 
+<script>
+var resultsum2 = document.getElementById("sumlist").innerText.replace(/,/, '.');
+var q = (Number(resultsum2)/6).toFixed(2);
+document.getElementById("pdv").innerText = q;
+</script>
 
 <script type="text/javascript">
 var resultsum = document.getElementById("sumlist").innerText.replace(/,/, '.');
@@ -270,9 +275,11 @@ document.getElementById("garantvnesok").innerText = fiveproc;
 var oneandtow = (resultsum * {{ commission_list }} / 100).toFixed(2);
 document.getElementById("komisiya").innerText = oneandtow;
 
-
 var sum_fi_one = (Number(fiveproc)-Number(fiveproc)- Number(oneandtow)).toFixed(2);
 document.getElementById("sum_fi_one").innerText = sum_fi_one;
+
+
+
 
 </script>
 <script>
@@ -281,6 +288,9 @@ var garantvnesok = document.getElementById("garantvnesok").innerText.replace(/,/
 var komisiya = document.getElementById("komisiya").innerText.replace(/,/, '.');
 var sum_pravka = (Number(garantv_list)-Number(garantvnesok)-Number(komisiya)).toFixed(2);
 document.getElementById("sum_fi_one_pravka").innerText = sum_pravka;
+
+
+
 </script>
 
 </body>

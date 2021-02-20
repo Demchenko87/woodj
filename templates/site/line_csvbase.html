@@ -90,21 +90,35 @@
        {% else %}
            <br>
            <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-6">
 
 
 
         <form action="{% url 'print_act' %}" method = "POST" target="_blank">
             {% csrf_token %}
              <input hidden id="garantv" type="text" pattern="\d+(\.\d{2})?" name="garantv">
+        <input id="EDRPOU" type="hidden" name="EDRPOU" placeholder="ЄДРПОУ" class="form-control" value="{{ user.contact.edrpo }}" required>
+
             <div class="row">
-            <div class="form-group col">
+            <div class="form-group col-lg-4">
             <input id="date" type="date" name="date" placeholder="Дата" class="form-control" required>
             </div>
-            <div class="form-group col">
-            <input id="EDRPOU" type="hidden" name="EDRPOU" placeholder="ЄДРПОУ" class="form-control" value="{{ user.contact.edrpo }}" required>
-            </div>
 
+
+
+            <div class="form-group col-lg-8">
+                <div class="input-group">
+  <select class="custom-select" name="lisgosp">
+    <option selected>Выбрати лісове господарство</option>
+    {% for agrhouse in agrhouse_list %}
+        <option value='{{ agrhouse.name }}'>{{ agrhouse.name }}</option>
+    {% endfor %}
+
+  </select>
+
+
+</div>
+                </div>
 
 
 
