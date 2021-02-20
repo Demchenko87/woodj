@@ -1,11 +1,12 @@
 import csv
 import os
-
+import datetime
 from django.core.files.storage import FileSystemStorage
 from django.db.models import Q
 from django.shortcuts import render
 from django.db.models import Sum
 from num2words import num2words
+
 
 from .models import Csvbase, Agrhouse
 
@@ -186,7 +187,7 @@ def print_dogovor(request):
     quarter = get_quarter(date)
 
     quarter2 = get_quarter2(date)
-
+    last_quarter_day = get_last_quarter_day(date)
     #seller2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('seller').order_by('seller')
     # seller = get_uniq_seller(seller2)
 
@@ -233,6 +234,7 @@ def print_dogovor(request):
     date_text = get_text_date(date)
 
     return render(request, "site/dogovor.html", {'EDRPOU_list': EDRPOU,
+                                              'last_quarter_day_list': last_quarter_day,
                                               'date_list': date,
                                               'buyer_list': buyer,
                                               'garantv_list': garantv,
@@ -272,27 +274,27 @@ def print_dogovor(request):
 
 def get_quarter(input):
     year, month, date = input.split('-')
-    if month == '01' or '02' or '03':
+    if month == '01' or month =='02' or month =='03':
         month = 'I квартал ' + year
-    elif month == '04' or '05' or '06':
-        month = 'II квартал' + year
-    elif month == '07' or '08' or '09':
-        month = 'III квартал'
-    elif month == '10' or '11' or '12':
-        month = 'IV квартал' + year
+    elif month == '04' or month =='05' or month =='06':
+        month = 'II квартал ' + year
+    elif month == '07' or month =='08' or month =='09':
+        month = 'III квартал '
+    elif month == '10' or month =='11' or month =='12':
+        month = 'IV квартал ' + year
     quarter = month
     return quarter
 
 def get_quarter2(input):
     year, month, date = input.split('-')
-    if month == '01' or '02' or '03':
+    if month == '01' or month =='02' or month =='03':
         month = 'I кварталi ' + year
-    elif month == '04' or '05' or '06':
-        month = 'II кварталi' + year
-    elif month == '07' or '08' or '09':
-        month = 'III кварталi'
-    elif month == '10' or '11' or '12':
-        month = 'IV кварталi' + year
+    elif month == '04' or month =='05' or month =='06':
+        month = 'II кварталi ' + year
+    elif month == '07' or month =='08' or month =='09':
+        month = 'III кварталi '
+    elif month == '10' or month =='11' or month =='12':
+        month = 'IV кварталi ' + year
     quarter = month
     return quarter
 
@@ -327,10 +329,31 @@ def get_text_date(input):
     print_date=date + ' ' + month + ' ' + year + ' року'
     return print_date
 
-
-# def filter_result(request):
-#    message = request.POST
-#    return render(request, "site/post.html", {'message_list': message})
+def get_last_quarter_day(input):
+    year, month, date = input.split('-')
+    if month == '01' or month == '02' or month == '03':
+        last_day = datetime.date(int(year), 4, 1) - datetime.timedelta(days=1)
+    elif month == '04' or month == '05' or month == '06':
+        last_day = datetime.date(int(year), 7, 1) - datetime.timedelta(days=1)
+    elif month == '07' or month == '08' or month == '09':
+        last_day = datetime.date(int(year), 10, 1) - datetime.timedelta(days=1)
+    elif month == '10' or month == '11' or month == '12':
+        last_day = datetime.date(int(year) + 1, 1, 1) - datetime.timedelta(days=1)
+    print_last_date = str(last_day)
+    last_year, last_month, last_date = print_last_date.split('-')
+    if last_month == '03':
+        last_month = 'березня'
+    elif last_month == '06':
+        last_month = 'червня'
+    elif last_month == '09':
+        last_month = 'вересня'
+    elif last_month == '12':
+        last_month = 'грудня'
+    print_last_day = last_date + ' ' + last_month + ' ' + last_year + ' року'
+    return print_last_day
+def filter_result(request):
+   message = request.POST
+   return render(request, "site/post.html", {'message_list': message})
 
 
 # # Create your views here.
