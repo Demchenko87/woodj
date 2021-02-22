@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.db.models import Sum
 from num2words import num2words
+from contact.models import Head
 
 
 from .models import Csvbase, Agrhouse
@@ -85,7 +86,7 @@ def print_act(request):
     date = request.POST['date']
     EDRPOU = request.POST['EDRPOU']
     garantv = request.POST['garantv']
-
+    head = Head.objects.all()
     buyer2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('buyer')[0]
     buyer = buyer2[0]
 
@@ -125,11 +126,12 @@ def print_act(request):
     grn_text = 'грн.'
     kop_text = 'коп.'
     total_numbers = str(uah) + '.' + str(kop)
-    total_leters = str(grn_leters) + ' ' + str(grn_text) + ' ' + str(kop_leters) + ' ' + str(kop_text)
+    total_leters = str(grn_leters).capitalize() + ' ' + str(grn_text) + ' ' + str(kop_leters) + ' ' + str(kop_text)
 
     date_text = get_text_date(date)
 
     return render(request, "site/post.html", {'EDRPOU_list': EDRPOU,
+                                              'head_list': head,
                                               'date_list': date,
                                               'buyer_list': buyer,
                                               'garantv_list': garantv,
@@ -151,6 +153,8 @@ def print_dogovor(request):
     EDRPOU = request.POST['EDRPOU']
     garantv = request.POST['garantv']
     lisgosp = request.POST['lisgosp']
+
+
 
     buyer2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('buyer')[0]
     buyer = buyer2[0]
@@ -229,11 +233,12 @@ def print_dogovor(request):
         grn_text = 'грн.'
         kop_text = 'коп.'
         total_numbers = str(uah) + '.' + str(kop)
-        total_leters = str(grn_leters) + ' ' + str(grn_text) + ' ' + str(kop_leters) + ' ' + str(kop_text)
+        total_leters = str(grn_leters).capitalize() + ' ' + str(grn_text) + ' ' + str(kop_leters) + ' ' + str(kop_text)
 
     date_text = get_text_date(date)
 
     return render(request, "site/dogovor.html", {'EDRPOU_list': EDRPOU,
+
                                               'last_quarter_day_list': last_quarter_day,
                                               'date_list': date,
                                               'buyer_list': buyer,

@@ -15,3 +15,15 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Head(models.Model):
+    firma = models.CharField("назва фiрми", max_length=150)
+    adress = models.CharField("адреса фiрми", max_length=150)
+    phone = models.CharField("телефон фiрми", max_length=150)
+    site = models.CharField("сайт фiрми", max_length=150)
+    director = models.CharField("директор фiрми", max_length=150)
+    fio = models.CharField("ПIБ", max_length=150)
+
+    def __str__(self):
+        return self.firma

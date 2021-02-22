@@ -13,18 +13,20 @@
     <style type="text/css" media="print">
 @page {
     size: auto;   /* auto is the initial value */
-    margin: 2cm;  /* this affects the margin in the printer settings */
+    margin: 1cm;  /* this affects the margin in the printer settings */
 }
 
 @media print {
   .noPrint{
     display:none;
   }
-
+.container {text-align: justify;}
 }
 
 </style>
     <style>
+       .container {text-align: justify;}
+
 table tr th {
   border: 1px solid black;
     text-align: center;
@@ -47,30 +49,29 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
     </div>
             <div class="col-6 text-left">
 
-                <p><b>ТОВАРНА БІРЖА "Агропромбіржа"</b></p>
-    <p>61022, м. Харків, майдан Свободи, 5, Держпром</p>
 
-    <p>тел (095) 551-52-07</p>
+{% for head in head_list %}
+<p><b>{{ head.firma }}"</b></p>
+<p>{{ head.adress }}</p>
+<p>{{ head.phone }}</p>
+<a href="http://{{ head.site }}">{{ head.site }}</a>
 
-    <a href="http://tbapb.kh.ua">tbapb.kh.ua</a>
-
-                </p>
             </div>
             <div class="col-6 text-right">
 <p>ЗАТВЕРДЖУЮ</p>
 
-<p>Директор ТБ "Агропромбіржа"</p>
+<p>{{ head.director}}</p>
 
-<p>_____________ Р.П. Вихор</p>
-
+<p>_____________ {{ head.fio}}</p>
+{% endfor %}
 <p>М.П.</p>
 
             </div>
 
 
         <div class="col-12 text-center mt-5 mb-3">
-        <h4>АУКЦІОННЕ СВІДОЦТВОПРО </h4><br>
-        <p style="text-transform: uppercase;">РЕЗУЛЬТАТИ ЕЛЕКТРОННОГО АУКЦІОНУ ІЗ ПРОДАЖУ НЕОБРОБЛЕНОЇ ДЕРЕВИНИ НА {{ quarter_list }} року</p>
+        <h4>АУКЦІОННЕ СВІДОЦТВО</h4><br>
+        <p style="text-transform: uppercase;">ПРО РЕЗУЛЬТАТИ ЕЛЕКТРОННОГО АУКЦІОНУ ІЗ ПРОДАЖУ НЕОБРОБЛЕНОЇ ДЕРЕВИНИ НА {{ quarter_list }} року</p>
     </div>
         <div class="col-6 text-left"><p><b>{{ date_text_list }}</b></p></div>
         <div class="col-6 text-right"><p><b>м. Харків</b></p></div>
@@ -221,7 +222,7 @@ td {border: 1px solid black; text-align: center;padding: 2px;font-size:12px;}
 </div>
 <div class="col-9 mt-5">
 
-        <p>Представник біржі :   _________________________ /Р.П. Вихор /</p>
+        <p>Представник біржі :   _________________________ /Д.Р. Вихор /</p>
         <p>Уповноважена особа Переможця :  _________________________ / <span style="margin-right: 230px;"></span>/</p>
     <p class="text-right" style="margin-right: 20px;">М.П.</p>
     </div>
@@ -251,3 +252,4 @@ document.getElementById("sum_fi_one_pravka").innerText = sum_pravka;
 </script>
 </body>
 </html>
+
