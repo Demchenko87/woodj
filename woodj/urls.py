@@ -26,7 +26,9 @@ urlpatterns = [
     path('contact', include("contact.urls")),
     path('csvbase/', include("csvbase.urls")),
     path('', include("website.urls")),
+    path('.well-known/', include("csvbase.urls")),
     path('upload/', views.simple_upload, name='simple_upload'),
+   
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

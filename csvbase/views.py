@@ -6,9 +6,8 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.db.models import Sum
 from num2words import num2words
-from contact.models import Head
-
-
+from contact.models import Head, Contact
+from django.http import HttpResponse
 from .models import Csvbase, Agrhouse
 
 
@@ -76,9 +75,12 @@ def filter(request):
    message = request.POST
    agrhouse = Agrhouse.objects.all().order_by('name')
    csvbase = Csvbase.objects.all()
+
+ 
    return render(request, "site/line_csvbase.html", {'message_list': message,
                                                      'agrhouse_list': agrhouse,
-                                                     'csvbase_list': csvbase})
+                                                     'csvbase_list': csvbase,
+                                                     })
 
 
 
@@ -159,14 +161,14 @@ def print_dogovor(request):
     buyer2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('buyer')[0]
     buyer = buyer2[0]
 
-    buyer_address2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('buyer_address')[0]
-    buyer_address = buyer_address2[0]
-
-    buyer_contact2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('contact')[0]
-    buyer_contact = buyer_contact2[0]
-
-    buyer_IPN2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('IPN')[0]
-    buyer_IPN = buyer_IPN2[0]
+    # buyer_address2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('buyer_address')[0]
+    # buyer_address = buyer_address2[0]
+    #
+    # buyer_contact2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('contact')[0]
+    # buyer_contact = buyer_contact2[0]
+    #
+    # buyer_IPN2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('IPN')[0]
+    # buyer_IPN = buyer_IPN2[0]
 
     seller_name2 = Agrhouse.objects.all().filter(Q(name=lisgosp)).values_list('name')[0]
     seller_name = seller_name2[0]
@@ -183,6 +185,23 @@ def print_dogovor(request):
     seller_individual_number = seller_individual_number2[0]
     seller_fio2 = Agrhouse.objects.all().filter(Q(name=lisgosp)).values_list('fio')[0]
     seller_fio = seller_fio2[0]
+
+    buyer2_name2 = Contact.objects.all().filter(Q(edrpo=EDRPOU)).values_list('name')[1]
+    buyer2_name = buyer2_name2[0]
+
+    buyer2_cod2 = Contact.objects.all().filter(Q(edrpo=EDRPOU)).values_list('ipn')[1]
+    buyer2_cod = buyer2_cod2[0]
+    buyer2_adress2 = Contact.objects.all().filter(Q(edrpo=EDRPOU)).values_list('adress')[1]
+    buyer2_adress = buyer2_adress2[0]
+    buyer2_r_r2 = Contact.objects.all().filter(Q(edrpo=EDRPOU)).values_list('r_r')[1]
+    buyer2_r_r = buyer2_r_r2[0]
+    buyer2_phone2 = Contact.objects.all().filter(Q(edrpo=EDRPOU)).values_list('phone')[1]
+    buyer2_phone = buyer2_phone2[0]
+
+    buyer2_fio2 = Contact.objects.all().filter(Q(edrpo=EDRPOU)).values_list('fio')[1]
+    buyer2_fio = buyer2_fio2[0]
+    f, i, o = buyer2_fio.split(' ')
+    fio = f + ' ' + i[0] + '. ' + o[0] + '.'
 
 
     commission2 = Csvbase.objects.all().filter(Q(EDRPOU=EDRPOU), Q(date=date)).values_list('commission')[0]
@@ -239,6 +258,7 @@ def print_dogovor(request):
 
     return render(request, "site/dogovor.html", {'EDRPOU_list': EDRPOU,
 
+
                                               'last_quarter_day_list': last_quarter_day,
                                               'date_list': date,
                                               'buyer_list': buyer,
@@ -253,9 +273,14 @@ def print_dogovor(request):
                                               'quarter_list2': quarter2,
                                               'commission_list': commission,
                                               'lisgosp_list':lisgosp,
-                                              'buyer_address_list': buyer_address,
-                                              'buyer_contact_list': buyer_contact,
-                                              'buyer_IPN_list': buyer_IPN,
+
+                                              'buyer_name_list': buyer2_name,
+                                              'buyer_address_list': buyer2_adress,
+                                              'buyer_contact_list': buyer2_phone,
+                                              'buyer_IPN_list': buyer2_cod,
+                                              'buyer_r_r_list': buyer2_r_r,
+                                              'buyer_fio_list': fio,
+
                                                  'seller_name_list': seller_name,
                                                  'seller_cod_list': seller_cod,
                                                  'seller_adress_list': seller_adress,
@@ -361,6 +386,8 @@ def filter_result(request):
    return render(request, "site/post.html", {'message_list': message})
 
 
+
+
 # # Create your views here.
 # def home_view(request):
 #     print(request.POST)
@@ -370,4 +397,19 @@ def filter_result(request):
 #     agrhouse = Agrhouse.objects.all()
 #     return render(request, "site/line_csvbase.html", {"agrhouse_list": agrhouse})
 
+# def read_file(request):
+#     f = open('static/44878CDDF2C235C196B8AAF73A2C3B34.txt', 'r')
+#     file_content = f.read()
+#     f.close()
+#     return HttpResponse(file_content, content_type="text/plain")
 
+# def read_file(request):
+#     return HttpResponse("92162408ACDECBD6E46F4269F5F1F3A1DAE326ACB361F4DD362D73E475F397FA")
+
+
+def read_file(request):
+    f = open('static/44878CDDF2C235C196B8AAF73A2C3B34.txt', 'r')
+    file_content = f.read()
+    f.close()
+    return HttpResponse(file_content, content_type="text/plain")
+    

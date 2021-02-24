@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'sg=_(0emn2-ih83wmon36#8&6k#smfd#&y271(d1!=gcif=51-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['195.123.220.221', 'tbapb.com.ua']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'csvbase',
     'allauth',
     'allauth.account',
+    'django_admin_listfilter_dropdown',
 ]
 
 MIDDLEWARE = [
@@ -135,12 +136,14 @@ LOGOUT_REDIRECT_URL = '/login'
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [STATIC_DIR]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_DIR = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [STATIC_DIR]
+
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_ROOT = '/www/woodj/woodj/static'
+MEDIA_ROOT = '/www/woodj/woodj/media'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {

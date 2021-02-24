@@ -18,7 +18,11 @@
               </div>
 
                 <div class="form-group mb-3">
-                  <input type="fio" name="fio" class="form-control" id="fio" placeholder="ПІБ" data-rule="minlen:4" data-msg="Введіть ПІБ" required />
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Назва пiдприємства"  data-msg="Введіть Назву пiдприємства" required />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group mb-3">
+                  <input type="text" name="fio" class="form-control" id="fio" placeholder="ПІБ" data-rule="minlen:4" data-msg="Введіть ПІБ" required />
                   <div class="validate"></div>
                 </div>
 
@@ -30,13 +34,21 @@
                   <input type="text" name="edrpo" class="form-control" id="edrpo" placeholder="код ЄДРПОУ" data-rule="minlen:8" pattern="[0-9]{8,10}" data-msg="Введіть ЄДРПОУ" required />
                   <div class="validate"></div>
                 </div>
+                <div class="form-group mb-3">
+                  <input type="text" name="ipn" class="form-control" id="ipn" placeholder="IПН" data-msg="Введіть IПН" required />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group mb-3">
+                  <input type="text" name="r_r" class="form-control" id="ipn" placeholder="р/р" data-msg="Введіть р/р" required />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group mb-3">
+                  <input type="text" name="adress" class="form-control" id="adress" placeholder="Юр. адрес" data-msg="Введіть Юр. адрес" required />
+                  <div class="validate"></div>
+                </div>
 
-              <div class="form-group mt-3">
-              <small id="emailHelp" class="form-text text-muted">Інформація про учасника (найменування, адреса, банківські реквізити, керівник)</small>
 
-                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Введіть інформацію учасника" placeholder="Інформація про учасника" required></textarea>
-                <div class="validate"></div>
-              </div>
+
 
 <div class="text-center mt-3"><button type="submit" class="btn" style="color:#fff;background: #2ae149;">Подати заявку</button></div>
 </form>
